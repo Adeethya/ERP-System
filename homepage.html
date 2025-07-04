@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ERP System Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baguet+Script&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Baguet Script', cursive;
+      background: #f0f4f8;
+      color: #333;
+    }
+    .sidebar {
+      width: 250px;
+      background-color: #004080;
+      color: white;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding-top: 20px;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+    }
+    .sidebar h2 {
+      text-align: center;
+      font-family: 'Baguet Script', cursive;
+      font-size: 36px;
+      margin-bottom: 40px;
+    }
+    .sidebar a,
+    .dropbtn {
+      display: block;
+      color: white;
+      padding: 10px 30px;
+      text-decoration: none;
+      font-size: 18px;
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      font-family: 'Baguet Script', cursive;
+    }
+    .sidebar a:hover,
+    .dropbtn:hover,
+    .dropdown-content a:hover {
+      background-color: #0066cc;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-content {
+      display: none;
+      position: relative;
+      margin-left: 20px;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .main {
+      margin-left: 250px;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #007acc;
+      padding: 20px;
+      color: white;
+      font-family: 'Baguet Script', cursive;
+      font-size: 32px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .charts {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .chart-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    canvas {
+      max-width: 100%;
+      height: auto;
+    }
+    footer {
+      background: #004080;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-family: 'Baguet Script', cursive;
+      position: relative;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <h2>Dashboard</h2>
+  <a href="Customer_Form.html">Customer Management</a>
+  <a href="Item_Form.html">Item Management</a>
+  <div class="dropdown">
+    <button class="dropbtn">Report Management ▾</button>
+    <div class="dropdown-content">
+      <a href="invoice.html"> Invoice Report</a>
+      <a href="Invoice_Item.html">Invoice Item Report</a>
+      <a href="item_report.html"> Item Report</a>
+    </div>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+  <header><b>WELCOME</b></header>
+
+  <div class="charts">
+    <!-- Chart 1 -->
+    <div class="chart-card">
+      <h3 style="font-family: 'Baguet Script', cursive;">Customer Overview</h3>
+      <canvas id="customerChart"></canvas>
+    </div>
+
+    <!-- Chart 2 -->
+    <div class="chart-card">
+      <h3 style="font-family: 'Baguet Script', cursive;">Item Stock</h3>
+      <canvas id="itemChart"></canvas>
+    </div>
+
+    <!-- Chart 3 -->
+    <div class="chart-card">
+      <h3 style="font-family: 'Baguet Script', cursive;">Invoices</h3>
+      <canvas id="invoiceChart"></canvas>
+    </div>
+
+    <!-- Chart 4 (New!) -->
+    <div class="chart-card">
+      <h3 style="font-family: 'Baguet Script', cursive;">Sales Performance</h3>
+      <canvas id="salesChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  &copy; 2025 ERP System | Designed by AdiG
+</footer>
+
+<!-- Charts Script -->
+<script>
+  new Chart(document.getElementById('customerChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr'],
+      datasets: [{
+        label: 'New Customers',
+        data: [12, 19, 3, 5],
+        backgroundColor: '#73a5da'
+      }]
+    }
+  });
+
+  new Chart(document.getElementById('itemChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Available', 'Sold', 'Returned'],
+      datasets: [{
+        label: 'Items',
+        data: [60, 30, 10],
+        backgroundColor: ['#28a745', '#ffc107', '#dc3545']
+      }]
+    }
+  });
+
+  new Chart(document.getElementById('invoiceChart'), {
+    type: 'line',
+    data: {
+      labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+      datasets: [{
+        label: 'Invoices Generated',
+        data: [5, 10, 7, 12],
+        backgroundColor: 'rgba(0, 123, 255, 0.2)',
+        borderColor: '#007bff',
+        fill: true,
+        tension: 0.3
+      }]
+    }
+  });
+
+  new Chart(document.getElementById('salesChart'), {
+    type: 'polarArea',
+    data: {
+      labels: ['North', 'South', 'East', 'West'],
+      datasets: [{
+        label: 'Sales',
+        data: [11, 16, 7, 14],
+        backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0']
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'right'
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

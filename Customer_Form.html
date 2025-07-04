@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Management</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Baguet+Script&display=swap" rel="stylesheet">
+
+  <!-- CSS & JS -->
+  <link rel="stylesheet" href="Customer_form.css">
+  <script src="Customer.js"></script>
+</head>
+<body>
+
+  <main>
+    <h1> Register Customer</h1>
+    <p>Please fill customer details below</p>
+
+    <div class="form-container">
+      <form name="MyForm" onsubmit="return validation()" action="Customer.php" method="post">
+        <div class="form-group">
+          <label>Title:</label>
+          <select name="title">
+            <option value="">--Select--</option>
+            <option value="Mr">Mr</option>
+            <option value="Mrs">Mrs</option>
+            <option value="Miss">Miss</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>First Name:</label>
+          <input type="text" name="first_name" id="first_name">
+        </div>
+
+        <div class="form-group">
+          <label>Last Name:</label>
+          <input type="text" name="last_name" id="last_name">
+        </div>
+
+        <div class="form-group">
+          <label>Contact Number:</label>
+          <input type="text" name="contact_number" id="contact_number">
+        </div>
+
+        <div class="form-group">
+          <label>District:</label>
+          <input type="text" name="district" id="district">
+        </div>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <div class="action-buttons">
+      <input type="text" id="search" placeholder="Search by Contact Number...">
+      <button onclick="searchCustomer()">Search</button>
+      <button onclick="window.location='customer_update.php'">Update</button>
+      <button onclick="window.location='Delete_Customer.php'">Delete</button>
+    </div>
+
+    <table border="1" id="customerTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Contact</th>
+          <th>District</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php include 'view_Customer.php'; ?>
+      </tbody>
+    </table>
+  </main>
+
+</body>
+</html>

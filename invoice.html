@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Invoice Report</title>
+  <style>
+    body {
+      font-family: 'Baguet Script', cursive;
+      background: #f0f4f8;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #004080;
+    }
+    form {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    label {
+      margin: 0 10px;
+      font-weight: bold;
+    }
+    input[type="date"] {
+      padding: 5px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 6px 15px;
+      background: #004080;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background: #0066cc;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background-color: #004080;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Invoice Report</h1>
+
+  <form id="searchForm" method="GET" action="">
+    <label for="start_date">Start Date:</label>
+    <input type="date" id="start_date" name="start_date" required />
+
+    <label for="end_date">End Date:</label>
+    <input type="date" id="end_date" name="end_date" required />
+
+    <button type="submit">Search</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Invoice Number</th>
+        <th>Date</th>
+        <th>Customer</th>
+        <th>Customer District</th>
+        <th>Item Count</th>
+        <th>Invoice Amount</th>
+      </tr>
+    </thead>
+    <tbody id="invoiceTableBody">
+      <!-- PHP will generate rows here -->
+      <?php include 'Invoive.php'; ?>
+    </tbody>
+  </table>
+  <script>
+  document.getElementById('searchForm').addEventListener('submit', function(e) {
+  const start = document.getElementById('start_date').value;
+  const end = document.getElementById('end_date').value;
+  if (!start || !end) {
+    alert("Please select both start and end dates!");
+    e.preventDefault();
+    return false;
+  }
+  if (start > end) {
+    alert("Start date cannot be after end date!");
+    e.preventDefault();
+    return false;
+  }
+});
+</script>
+
+</body>
+</html>

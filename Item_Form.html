@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Item Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baguet+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="item.css">
+  <script src="Item_Validation.js"></script>
+</head>
+<body>
+
+ 
+
+  <main>
+    <h1> Add Items</h1>
+    <p>Please fill item details below </p>
+
+
+    <div class="form-container">
+      <form name="itemForm" action="Insert_Item.php" method="post" onsubmit="return validateItem()">
+        <div class="form-group">
+          <label>Item Code:</label>
+          <input type="text" name="item_code">
+        </div>
+
+        <div class="form-group">
+          <label>Item Name:</label>
+          <input type="text" name="item_name">
+        </div>
+
+        <div class="form-group">
+          <label>Category:</label>
+          <select name="category">
+            <option value="">--Select--</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Furniture">Furniture</option>
+            <option value="Clothing">Clothing</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Sub Category:</label>
+          <select name="sub_category">
+            <option value="">--Select--</option>
+            <option value="Mobile">Mobile</option>
+            <option value="Sofa">Sofa</option>
+            <option value="Shirt">Shirt</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Quantity:</label>
+          <input type="number" name="quantity">
+        </div>
+
+        <div class="form-group">
+          <label>Unit Price:</label>
+          <input type="text" name="unit_price">
+        </div>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <div class="action-buttons">
+      <input type="text" id="search" placeholder="Search by Item Code...">
+      <button onclick="searchItem()">Search</button>
+      <button onclick="window.location='item_update.php'">Update</button>
+      <button onclick="window.location='Delete_Item.php'">Delete</button>
+    </div>
+
+    <table border="1" id="itemTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Item Code</th>
+          <th>Item Name</th>
+          <th>Category</th>
+          <th>Subcategory</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php include 'view_Item.php'; ?>
+      </tbody>
+    </table>
+  </main>
+
+</body>
+</html>
